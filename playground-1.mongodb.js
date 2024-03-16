@@ -161,7 +161,7 @@ db.users.insertMany([
         correo: "janedoe@gmail.com",
         ciudad: "paris",
         pais: "france",
-        salario: 2000,
+        salario: 3200,
         edad: 54,
         altura: 165,
         peso: 65
@@ -173,7 +173,7 @@ db.users.insertMany([
         ciudad: "rome",
         pais: "italy",
         salario: 1200,
-        edad: 36,
+        edad: 27,
         altura: 180,
         peso: 90
     },
@@ -183,7 +183,7 @@ db.users.insertMany([
         correo: "judybrown@gmail.com",
         ciudad: "madrid",
         pais: "spain",
-        salario: 2800,
+        salario: 3800,
         edad: 22,
         altura: 160,
         peso: 55
@@ -242,18 +242,127 @@ db.users.insertMany([
         edad: 55,
         altura: 175,
         peso: 80
+    },
+    {
+        nombres: "Henry",
+        apellidos: "Cavil",
+        correo: "henry@gmail.com",
+        ciudad: "new york",
+        pais: "united states",
+        salario: 4500,
+        edad: 37,
+        altura: 197,
+        peso: 120
+    },
+    {
+        nombres: "Kyle",
+        apellidos: "Walker",
+        correo: "walker@gmail.com",
+        ciudad: "london",
+        pais: "uk",
+        salario: 6500,
+        edad: 33,
+        altura: 187,
+        peso: 110
+    },
+    {
+        nombres: "Logan",
+        apellidos: "Martin",
+        correo: "lm@gmail.com",
+        ciudad: "sidney",
+        pais: "australia",
+        salario: 3500,
+        edad: 27,
+        altura: 182,
+        peso: 150
+    },
+    {
+        nombres: "Terrens",
+        apellidos: "Doyle",
+        correo: "terrens@gmail.com",
+        ciudad: "quebec",
+        pais: "canadá",
+        salario: 1000,
+        edad: 30,
+        altura: 181,
+        peso: 90
+    },
+    {
+        nombres: "Philip",
+        apellidos: "Doyle",
+        correo: "philip@gmail.com",
+        ciudad: "calgary",
+        pais: "canadá",
+        salario: 4500,
+        edad: 25,
+        altura: 177,
+        peso: 100
+    },
+    {
+        nombres: "Lonely",
+        apellidos: "Man",
+        ciudad: "roma",
+        pais: "italy",
+        salario: 1000,
+        edad: 43,
+        altura: 172,
+        peso: 80
+    },
+    {
+        nombres: "Neymar",
+        apellidos: "Jr",
+        correo: "ney@gmail.com",
+        ciudad: "manaos",
+        pais: "brazil",
+        salario: 1400,
+        edad: 32,
+        altura: 175,
+        peso: 90
+    },
+    {
+        nombres: "Lionel",
+        apellidos: "Messino",
+        correo: "messi@gmail.com",
+        ciudad: "caracas",
+        pais: "argentina",
+        salario: 10000,
+        edad: 24,
+        altura: 171,
+        peso: 110
+    },
+    {
+        nombres: "Pepito",
+        apellidos: "Perez",
+        correo: "pepi@gmail.com",
+        ciudad: "temuco",
+        pais: "chile",
+        salario: 1500,
+        edad: 20,
+        altura: 177,
+        peso: 100
+    },
+    {
+        nombres: "Mohamed",
+        apellidos: "Carais",
+        correo: "moh@gmail.com",
+        ciudad: "jaipur",
+        pais: "india",
+        edad: 32,
+        altura: 185,
+        peso: 77,
     }
-])
+]);
 
 db.users.insertOne({
-    nombres: "Mohamed",
-    apellidos: "Carais",
-    correo: "moh@gmail.com",
-    ciudad: "jaipur",
-    pais: "india",
-    edad: 32,
-    altura: 185,
-    peso: 77
+    nombres: "ana",
+    apellidos: "lopez",
+    ciudad: "medellin",
+    pais: "colombia",
+    correo: "al@gmail.com",
+    salario: 3700,
+    edad: 26,
+    altura: 168,
+    peso: 90
 })
 
 db.users.insertMany([
@@ -458,7 +567,7 @@ db.users.find({
 //19
 db.users.find({
     $and: [
-        { pais: { $ne: "colombia" }},
+        { pais: { $ne: "colombia" } },
         { altura: { $lt: 170 } }
     ]
 })
@@ -466,10 +575,195 @@ db.users.find({
 //20
 db.users.find({
     $and: [
-        { pais: { $eq: "india" }},
+        { pais: { $eq: "india" } },
         { salario: { $exists: false } }
     ]
 })
 
 
 //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
+
+//Operaciones de Actualización
+
+db.users.find();
+
+//1
+db.users.updateMany({}, {
+    $mul: { salario: 1.10 }
+});
+
+//2
+db.users.updateMany({ ciudad: "new york" }, {
+    $set: { ciudad: "los angeles" }
+});
+
+//3
+db.users.updateOne({
+    $and: [
+        { nombres: { $eq: "Juan" } },
+        { apellidos: { $eq: "Perez" } }
+    ]
+}, {
+    $set: { correo: "nuevo@riwi.com" },
+});
+
+//4
+db.users.updateMany({ correo: "ejemplo@riwi.es" }, {
+    $set: { edad: 35 }
+});
+
+//5
+db.users.updateMany({ pais: { $regex: /mexico/i } }, {
+    $set: { pais: "canadá" }
+});
+
+//6
+db.users.updateMany({}, {
+    $inc: { altura: 5 }
+});
+
+//7
+db.users.updateMany({ correo: { $eq: "otro@riwi.net" } }, {
+    $set: { apellidos: "gonzáles" }
+});
+
+//8
+db.users.updateMany({ nombres: { $eq: "maria" } }, {
+    $set: { peso: 140 }
+});
+
+//9
+db.users.updateMany({ pais: { $eq: "united states" } }, {
+    $mul: { salario: 1.15 }
+});
+
+//10
+db.users.updateMany({ nombres: { $eq: "pedro" } }, {
+    $set: { correo: "nuevo_correo@riwi.co" }
+});
+
+//11
+db.users.updateMany({ edad: { $lt: 30 } }, {
+    $set: { edad: 30 }
+});
+
+//12
+db.users.updateMany({ salario: { $lt: 3000 } }, {
+    $mul: { salario: 1.2 }
+});
+
+//13
+db.users.updateMany({ ciudad: { $eq: "bogota" } }, {
+    $set: { ciudad: "medellin" }
+});
+
+//14
+db.users.updateMany({ salario: { $gt: 5000 } }, {
+    $set: { pais: "australia" }
+});
+
+//15
+db.users.updateMany({ edad: { $gt: 50 } }, {
+    $inc: { edad: -5 }
+});
+
+//16
+db.users.updateMany({ peso: { $gt: 200 } }, {
+    $set: { peso: 180 }
+});
+
+//17
+db.users.updateMany({ ciudad: { $eq: "london" } }, {
+    $mul: { salario: 1.25 }
+});
+
+//18
+db.users.updateMany({ salario: { $gt: 4000 } }, {
+    $set: { apellidos: "smith" }
+});
+
+//19
+db.users.updateMany({ nombres: { $regex: /^a/i } }, {
+    $set: { correo: "nuevo@riwi.es" }
+});
+
+//20
+db.users.updateMany({ altura: { $lt: 160 } }, {
+    $set: { ciudad: "paris" }
+});
+
+//Operaciones de Eliminación
+
+//1
+db.users.deleteMany({ salario: { $lt: 2000 } });
+
+//2
+db.users.deleteMany({ edad: { $lt: 25 } });
+
+//3
+db.users.deleteMany({ ciudad: { $eq: "paris" } });
+
+//4
+db.users.deleteMany({ peso: { $gt: 180 } });
+
+//5
+db.users.deleteMany({ peso: { $lt: 160 } });
+
+//6
+db.users.deleteMany({
+    $and:
+        [
+            { nombres: { $eq: "john" } },
+            { apellidos: { $eq: "doe" } }
+        ]
+});
+
+//7
+db.users.deleteMany({ correo: { $eq: "borrar@riwi.com" } });
+
+//8
+db.users.deleteMany({ correo: { $exists: false } });
+
+//9
+db.users.deleteMany({ ciudad: { $regex: /^tokyo/i } });
+
+//10
+db.users.deleteMany({ edad: { $lt: 18 } });
+
+//11
+db.users.deleteMany({
+    $or:
+        [
+            { salario: { $eq: 0 } },
+            { salario: { $exists: false } }
+        ]
+});
+
+//12
+db.users.deleteMany({
+    $and:
+        [
+            { ciudad: { $regex: /^new york/i } },
+            { salario: { $gt: 5000 } }
+        ]
+});
+
+//13
+
+
+
+
+
+
+
+
+
+
+
+db.users.deleteMany({
+    $and: [
+        { nombres: { $eq: "Juan" } },
+        { correo: { $exists: false } }
+    ]
+});
+

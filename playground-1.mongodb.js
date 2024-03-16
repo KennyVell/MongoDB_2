@@ -580,9 +580,6 @@ db.users.find({
     ]
 })
 
-
-//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
-
 //Operaciones de Actualización
 
 db.users.find();

@@ -603,16 +603,6 @@ db.users.deleteMany({ edad: { $gte: 30 } });
 //20
 db.users.deleteMany({ altura: { $gt: 190 } });
 
-
-
-
-
-
-
-
-
-
-
 db.users.deleteMany({
     $and: [
         { nombres: { $eq: "Juan" } },

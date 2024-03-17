@@ -562,6 +562,46 @@ db.users.deleteMany({
 });
 
 //13
+db.users.deleteMany({ correo: { $regex: /spam/i } });
+
+//14
+db.users.deleteMany({
+    $and:
+        [
+            { ciudad: { $regex: /bello/i } },
+            { edad: { $gt: 50 } }
+        ]
+});
+
+//15
+db.users.deleteMany({ apellidos: { $regex: /gonzález/i } });
+
+//16
+db.users.deleteMany({ edad: { $gt: 70 } });
+
+//17
+db.users.deleteMany({
+    $and:
+        [
+            { pais: { $regex: /canadá/i } },
+            { salario: { $lt: 4000 } }
+        ]
+});
+
+//18
+db.users.deleteMany({
+    $and:
+        [
+            { salario: { $gte: 1000 } },
+            { salario: { $lte: 2000 } }
+        ]
+});
+
+//19
+db.users.deleteMany({ edad: { $gte: 30 } });
+
+//20
+db.users.deleteMany({ altura: { $gt: 190 } });
 
 
 
